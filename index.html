@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaWorld — English for Every Voice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm1: #FF6B35;
+    --warm2: #FFB347;
+    --warm3: #FFF0D1;
+    --cool1: #5B5BD6;
+    --cool2: #9B59B6;
+    --cool3: #C5CAF5;
+    --dark: #1A1523;
+    --mid: #2D2640;
+    --text: #3D3650;
+    --light: #FAF8FF;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(250,248,255,0.85);
+    border-bottom: 1px solid rgba(91,91,214,0.1);
+    transition: all 0.3s;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--warm1), var(--cool1));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .logo span { font-style: italic; font-weight: 300; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px;
+    background: linear-gradient(90deg, var(--warm1), var(--cool1));
+    transform: scaleX(0); transition: transform 0.3s; transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--cool1); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    padding: 0.65rem 1.6rem;
+    background: linear-gradient(135deg, var(--warm1), var(--cool2));
+    color: white; border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: all 0.3s; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(91,91,214,0.25);
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(91,91,214,0.35); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 7rem 6% 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,107,53,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(91,91,214,0.1) 0%, transparent 55%),
+                radial-gradient(ellipse at 90% 10%, rgba(155,89,182,0.08) 0%, transparent 50%),
+                var(--light);
+  }
+  .orb {
+    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: floatOrb 8s ease-in-out infinite;
+  }
+  .orb-1 { width: min(400px, 60vw); height: min(400px, 60vw); background: rgba(255,179,71,0.18); top: 5%; right: 5%; animation-delay: 0s; }
+  .orb-2 { width: min(300px, 50vw); height: min(300px, 50vw); background: rgba(91,91,214,0.13); bottom: 10%; left: 3%; animation-delay: -3s; }
+  .orb-3 { width: min(200px, 35vw); height: min(200px, 35vw); background: rgba(255,107,53,0.12); top: 40%; left: 42%; animation-delay: -6s; }
+
+  @keyframes floatOrb {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 580px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.4rem 1rem;
+    background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(91,91,214,0.1));
+    border: 1px solid rgba(91,91,214,0.2);
+    border-radius: 50px;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--cool1); text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    animation: fadeSlideUp 0.8s ease both;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--warm1), var(--cool1));
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.7} }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--dark);
+    margin-bottom: 1.2rem;
+    animation: fadeSlideUp 0.8s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--warm1) 0%, var(--cool1) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.7;
+    color: var(--text); opacity: 0.8;
+    max-width: 480px; margin-bottom: 2rem;
+    animation: fadeSlideUp 0.8s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeSlideUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: linear-gradient(135deg, var(--warm1), var(--cool2));
+    color: white; border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: all 0.35s;
+    box-shadow: 0 6px 30px rgba(255,107,53,0.3);
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,107,53,0.4); }
+  .btn-ghost {
+    padding: 0.9rem 2.2rem;
+    background: transparent;
+    color: var(--cool1); border: 1.5px solid rgba(91,91,214,0.35);
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { background: rgba(91,91,214,0.07); border-color: var(--cool1); transform: translateY(-2px); }
+
+  /* Globe — right column, perfectly centered */
+  .hero-visual {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 520px;
+    margin: 0 auto;
+    animation: fadeSlideUp 1s 0.2s ease both;
+  }
+  .globe-wrap {
+    position: relative; width: 100%; padding-bottom: 100%;
+  }
+  .globe-wrap svg, .globe-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .floating-flags {
+    position: absolute; inset: 0;
+  }
+  .flag-pill {
+    padding: 0.45rem 1rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(26,21,35,0.12);
+    font-size: 0.82rem; font-weight: 500;
+    display: flex; align-items: center; gap: 0.5rem;
+    white-space: nowrap; color: var(--text);
+    animation: floatPill var(--dur, 6s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  .flag-pill .flag { font-size: 1.2rem; }
+
+  @keyframes floatPill {
+    0%,100%{ transform: translateY(0) rotate(var(--rot,0deg)); }
+    50%{ transform: translateY(-12px) rotate(var(--rot,0deg)); }
+  }
+
+  /* Pills always hidden when visual is hidden */
+  @media (max-width: 900px) {
+    .flag-pill { display: none !important; }
+    .hero-visual { display: none !important; }
+  }
+  /* Stats strip */
+  .stats-strip {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+    padding: 2.5rem 5%;
+    display: flex; justify-content: center; gap: 6rem;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; animation: fadeSlideUp 0.7s ease both; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--warm2), var(--warm1));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 0.3rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 7rem 5%; }
+  .section-tag {
+    display: inline-block; font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm1); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 300; line-height: 1.15; color: var(--dark);
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: italic; color: var(--cool1); }
+  .section-sub {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: var(--text); opacity: 0.75; max-width: 560px;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  #how {
+    background: linear-gradient(160deg, #F3F1FF 0%, #FFF7F0 100%);
+  }
+  .how-header { text-align: center; margin-bottom: 4.5rem; }
+  .how-header .section-sub { margin: 0 auto; }
+  .steps {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute; top: 55px; left: 12%; right: 12%; height: 1.5px;
+    background: linear-gradient(90deg, var(--warm1), var(--cool1), var(--warm2));
+    opacity: 0.25;
+  }
+  .step {
+    background: white; border-radius: 20px;
+    padding: 2.2rem 1.8rem;
+    box-shadow: 0 4px 30px rgba(26,21,35,0.07);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .step:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(26,21,35,0.12); }
+  .step-num {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--warm1), var(--cool2));
+    color: white; font-size: 1.1rem; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.4rem;
+    box-shadow: 0 6px 20px rgba(255,107,53,0.3);
+  }
+  .step-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .step h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: 0.6rem; }
+  .step p { font-size: 0.88rem; line-height: 1.7; color: var(--text); opacity: 0.75; }
+
+  /* ─── COURSES ─── */
+  #courses { background: var(--light); }
+  .courses-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+  .cart-btn {
+    position: relative;
+    padding: 0.7rem 1.5rem;
+    background: var(--dark); color: white;
+    border-radius: 50px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+    display: flex; align-items: center; gap: 0.6rem; transition: all 0.3s;
+  }
+  .cart-btn:hover { background: var(--mid); transform: translateY(-2px); }
+  .cart-count {
+    position: absolute; top: -6px; right: -6px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--warm1), var(--cool2));
+    color: white; font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .courses-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.8rem;
+  }
+  .course-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 4px 25px rgba(26,21,35,0.07);
+    transition: all 0.35s;
+    cursor: pointer;
+  }
+  .course-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(26,21,35,0.13); }
+  .course-img {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; position: relative; overflow: hidden;
+  }
+  .course-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: inherit; opacity: 0.15;
+  }
+  .c1 { background: linear-gradient(135deg, #FF6B35, #FFB347); }
+  .c2 { background: linear-gradient(135deg, #5B5BD6, #9B59B6); }
+  .c3 { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+  .c4 { background: linear-gradient(135deg, #E91E8C, #FF6B35); }
+  .c5 { background: linear-gradient(135deg, #00B4DB, #5B5BD6); }
+  .c6 { background: linear-gradient(135deg, #F7971E, #FFD200); }
+  .course-body { padding: 1.5rem; }
+  .course-level {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--cool1); font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .course-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+  .course-desc { font-size: 0.84rem; line-height: 1.6; color: var(--text); opacity: 0.7; margin-bottom: 1.2rem; }
+  .course-footer { display: flex; align-items: center; justify-content: space-between; }
+  .course-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--dark); }
+  .course-price span { font-size: 0.8rem; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--text); opacity: 0.6; }
+  .add-cart {
+    padding: 0.55rem 1.3rem;
+    background: linear-gradient(135deg, var(--warm1), var(--cool2));
+    color: white; border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255,107,53,0.25);
+  }
+  .add-cart:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(255,107,53,0.4); }
+  .add-cart.added { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+
+  /* Cart Drawer */
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(26,21,35,0.5);
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-drawer {
+    position: fixed; right: 0; top: 0; bottom: 0; width: min(420px, 100vw);
+    background: white; z-index: 201;
+    transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    display: flex; flex-direction: column;
+    box-shadow: -20px 0 80px rgba(26,21,35,0.15);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-head {
+    padding: 2rem; border-bottom: 1px solid rgba(0,0,0,0.07);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--dark); }
+  .cart-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; }
+  .cart-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .cart-item-emoji { font-size: 2rem; }
+  .cart-item-name { font-size: 0.9rem; font-weight: 500; color: var(--dark); }
+  .cart-item-price { font-size: 0.85rem; color: var(--warm1); font-weight: 600; }
+  .cart-foot {
+    padding: 2rem; border-top: 1px solid rgba(0,0,0,0.07);
+  }
+  .cart-total { display: flex; justify-content: space-between; margin-bottom: 1.5rem; }
+  .cart-total span { font-size: 1rem; font-weight: 500; color: var(--text); }
+  .cart-total strong { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--dark); }
+  .checkout-btn { width: 100%; }
+  .empty-cart { text-align: center; padding: 3rem 1rem; color: var(--text); opacity: 0.5; }
+  .empty-cart .e { font-size: 3rem; }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: linear-gradient(160deg, var(--dark) 0%, var(--mid) 100%);
+    color: white;
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text .section-tag { color: var(--warm2); }
+  .about-text .section-title { color: white; }
+  .about-text .section-sub { color: rgba(255,255,255,0.65); max-width: 100%; }
+  .about-values { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .about-val {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 14px; border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.3s;
+  }
+  .about-val:hover { background: rgba(255,255,255,0.09); }
+  .about-val-icon { font-size: 1.5rem; }
+  .about-val-text h4 { font-size: 0.95rem; font-weight: 500; color: white; margin-bottom: 0.25rem; }
+  .about-val-text p { font-size: 0.82rem; line-height: 1.6; color: rgba(255,255,255,0.5); }
+
+  /* ─── TEACHERS SECTION ─── */
+  #teachers {
+    background: linear-gradient(160deg, #0F0C1A 0%, #1A1523 50%, #0D1426 100%);
+    padding: 7rem 5%;
+    overflow: hidden;
+    position: relative;
+  }
+  #teachers::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255,107,53,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 30%, rgba(91,91,214,0.07) 0%, transparent 55%);
+  }
+  .teachers-header {
+    text-align: center; margin-bottom: 4rem;
+    position: relative; z-index: 1;
+  }
+  .teachers-header .section-tag { color: var(--warm2); }
+  .teachers-header .section-title { color: white; }
+  .teachers-header .section-sub { color: rgba(255,255,255,0.55); margin: 0 auto; }
+
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px; margin: 0 auto 3rem;
+    position: relative; z-index: 1;
+  }
+
+  .teacher-card {
+    border-radius: 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 1.5rem 1.8rem;
+    text-align: center;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .teacher-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--card-gradient);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .teacher-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  }
+  .teacher-card:hover::before { opacity: 1; }
+
+  .teacher-avatar-wrap {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 1.3rem;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .teacher-avatar-wrap::before {
+    content: '';
+    position: absolute; inset: -3px; border-radius: 50%;
+    background: var(--card-gradient);
+    z-index: 0;
+  }
+  .teacher-avatar-inner {
+    position: absolute; inset: 3px; border-radius: 50%;
+    background: #1e1a2e;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.6rem; z-index: 1;
+  }
+  .teacher-flag {
+    position: absolute; bottom: 2px; right: 2px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #1e1a2e;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; z-index: 2;
+    border: 2px solid #1e1a2e;
+  }
+  .teacher-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600; color: white;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+  .teacher-origin {
+    font-size: 0.72rem; color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .teacher-role {
+    display: inline-block;
+    padding: 0.28rem 0.9rem;
+    background: var(--card-gradient);
+    border-radius: 50px;
+    font-size: 0.72rem; font-weight: 500; color: white;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  .teacher-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    justify-content: center;
+  }
+  .teacher-tag {
+    padding: 0.22rem 0.7rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px;
+    font-size: 0.68rem; color: rgba(255,255,255,0.5);
+  }
+
+  .teachers-group-banner {
+    max-width: 1200px; margin: 0 auto;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(91,91,214,0.12));
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 2rem;
+    position: relative; z-index: 1;
+  }
+  .banner-faces {
+    display: flex; align-items: center;
+  }
+  .banner-face {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 2.5px solid #1A1523;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-left: -10px;
+    transition: transform 0.2s;
+  }
+  .banner-face:first-child { margin-left: 0; }
+  .banner-face:hover { transform: scale(1.2) translateY(-3px); z-index: 2; }
+  .banner-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; color: white;
+    margin-bottom: 0.3rem;
+  }
+  .banner-text h3 em { font-style: italic; color: var(--warm2); }
+  .banner-text p { font-size: 0.83rem; color: rgba(255,255,255,0.45); }
+  .banner-stats {
+    display: flex; gap: 2.5rem;
+  }
+  .banner-stat { text-align: center; }
+  .banner-stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--warm2), var(--warm1));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; line-height: 1;
+  }
+  .banner-stat-l {
+    font-size: 0.7rem; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 900px) {
+    .teachers-grid { grid-template-columns: repeat(2, 1fr); }
+    .teachers-group-banner { flex-direction: column; text-align: center; }
+    .banner-faces { justify-content: center; }
+    .banner-stats { justify-content: center; }
+  }
+  @media (max-width: 500px) {
+    .teachers-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  }
+
+  /* ─── VIDEO ─── */
+  #video {
+    background: var(--light);
+    text-align: center;
+  }
+  .video-container {
+    max-width: 900px; margin: 3rem auto 0;
+    border-radius: 24px; overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, var(--dark), var(--mid));
+    box-shadow: 0 30px 80px rgba(26,21,35,0.2);
+    aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .video-placeholder {
+    text-align: center; color: white;
+  }
+  .play-btn {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--warm1), var(--cool2));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 40px rgba(255,107,53,0.4);
+    transition: transform 0.3s;
+  }
+  .video-container:hover .play-btn { transform: scale(1.1); }
+  .video-placeholder p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; opacity: 0.7; }
+
+  /* ─── GALLERY ─── */
+  #gallery { background: var(--light); }
+  .gallery-header { text-align: center; margin-bottom: 3rem; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem; max-width: 1200px; margin: 0 auto;
+  }
+  .gallery-item {
+    border-radius: 16px; overflow: hidden;
+    aspect-ratio: 1; position: relative;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+    transition: transform 0.3s; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 3rem;
+  }
+  .gallery-item.tall { grid-row: span 2; aspect-ratio: unset; }
+  .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+  .gallery-item:hover { transform: scale(0.98); }
+  .gallery-item .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,21,35,0.5) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1rem 1.2rem;
+  }
+  .gallery-item:hover .overlay { opacity: 1; }
+  .overlay-text { color: white; font-size: 0.82rem; font-weight: 500; }
+  .gallery-load {
+    text-align: center; margin-top: 2rem;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #reviews {
+    background: linear-gradient(160deg, #F3F1FF 0%, #FFF7F0 100%);
+  }
+  .reviews-header { text-align: center; margin-bottom: 3.5rem; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem; max-width: 1100px; margin: 0 auto;
+  }
+  .review-card {
+    background: white; border-radius: 20px;
+    padding: 2rem; transition: all 0.3s;
+    box-shadow: 0 4px 25px rgba(26,21,35,0.06);
+    position: relative; overflow: hidden;
+  }
+  .review-card::before {
+    content: '\201C';
+    position: absolute; top: 0.5rem; right: 1.5rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 5rem;
+    color: var(--warm1); opacity: 0.12; line-height: 1;
+  }
+  .review-card:hover { transform: translateY(-5px); box-shadow: 0 16px 45px rgba(26,21,35,0.1); }
+  .review-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 1rem;
+    position: relative;
+  }
+  .review-avatar::after {
+    content: ''; position: absolute; inset: -2px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+    z-index: -1;
+  }
+  .review-stars { color: var(--warm2); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .review-text { font-size: 0.9rem; line-height: 1.75; color: var(--text); margin-bottom: 1.2rem; font-style: italic; }
+  .review-author { font-size: 0.88rem; font-weight: 600; color: var(--dark); }
+  .review-country { font-size: 0.78rem; color: var(--text); opacity: 0.6; }
+
+  /* ─── TRIAL CTA ─── */
+  #trial {
+    padding: 7rem 5%;
+    background: linear-gradient(135deg, var(--warm1) 0%, #FF4E88 40%, var(--cool1) 80%, var(--cool2) 100%);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  #trial::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .trial-content { position: relative; z-index: 1; }
+  .trial-content .section-tag { color: rgba(255,255,255,0.8); }
+  .trial-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300; color: white; margin-bottom: 1rem; line-height: 1.15;
+  }
+  .trial-content h2 em { font-style: italic; }
+  .trial-content p { font-size: 1.05rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; }
+  .trial-btn {
+    padding: 1rem 2.8rem;
+    background: white; color: var(--warm1);
+    border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    text-decoration: none; display: inline-block;
+  }
+  .trial-btn:hover { transform: translateY(-3px); box-shadow: 0 18px 50px rgba(0,0,0,0.2); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 4rem 5% 2rem; color: white;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand .logo { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; }
+  .footer-col h5 { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; }
+  .footer-col a { display: block; font-size: 0.88rem; color: rgba(255,255,255,0.65); text-decoration: none; margin-bottom: 0.6rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--warm2); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+  .socials { display: flex; gap: 1rem; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-link:hover { background: linear-gradient(135deg, var(--warm1), var(--cool2)); border-color: transparent; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── LANGUAGE SWITCHER ─── */
+  .lang-switcher {
+    position: relative;
+  }
+  .lang-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(91,91,214,0.08);
+    border: 1.5px solid rgba(91,91,214,0.2);
+    border-radius: 50px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+    color: var(--text); transition: all 0.2s;
+  }
+  .lang-btn:hover { background: rgba(91,91,214,0.14); border-color: var(--cool1); }
+  .lang-flag { font-size: 1rem; }
+  .lang-arrow { font-size: 0.6rem; transition: transform 0.3s; }
+  .lang-switcher.open .lang-arrow { transform: rotate(180deg); }
+
+  .lang-dropdown {
+    position: absolute; top: calc(100% + 8px); right: 0;
+    background: white; border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(26,21,35,0.15);
+    border: 1px solid rgba(91,91,214,0.1);
+    overflow: hidden; min-width: 160px;
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+    z-index: 200;
+  }
+  .lang-switcher.open .lang-dropdown { opacity: 1; visibility: visible; transform: none; }
+  .lang-option {
+    display: flex; align-items: center; gap: 0.8rem;
+    padding: 0.75rem 1.2rem;
+    cursor: pointer; font-size: 0.88rem; color: var(--text);
+    transition: background 0.15s;
+  }
+  .lang-option:hover { background: rgba(91,91,214,0.06); }
+  .lang-option.active { background: rgba(91,91,214,0.08); color: var(--cool1); font-weight: 500; }
+  .lang-option .lf { font-size: 1.1rem; }
+
+  /* ─── CURSOR TRAIL (le petit truc) ─── */
+  .cursor-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 8000;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #FF6B35, #9B59B6);
+    transition: width 0.2s, height 0.2s;
+    mix-blend-mode: multiply;
+    opacity: 0;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px; border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 7999;
+    transform: translate(-50%, -50%);
+    border: 1.5px solid rgba(255,107,53,0.5);
+    transition: transform 0.12s ease, width 0.2s, height 0.2s;
+    mix-blend-mode: multiply;
+    opacity: 0;
+  }
+  .cursor-spark {
+    position: fixed; pointer-events: none; z-index: 9996;
+    width: 6px; height: 6px; border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  body { cursor: none; }
+  a, button { cursor: none; }
+
+  /* ─── RESPONSIVE ─── */
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — TABLET (iPad, ≤1024px)
+  ═══════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .hero-visual { width: 44%; }
+    .hero-content { max-width: 520px; }
+    .teachers-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — SMALL TABLET / LARGE MOBILE (≤900px)
+  ═══════════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    /* Nav */
+    .nav-links { display: none; }
+    nav { padding: 1rem 4%; }
+
+    /* Hero */
+    #hero {
+      grid-template-columns: 1fr;
+      padding: 6rem 5% 3rem;
+      text-align: center;
+    }
+    .hero-content { max-width: 100%; }
+    .hero-eyebrow { margin: 0 auto 1.2rem; }
+    .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { display: none; }
+
+    /* Stats */
+    .stats-strip { gap: 2.5rem; padding: 2rem 5%; }
+
+    /* Steps */
+    .steps::before { display: none; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+
+    /* Courses */
+    .courses-grid { grid-template-columns: repeat(2, 1fr); }
+    .courses-header { flex-direction: column; align-items: flex-start; }
+
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+    /* Teachers */
+    .teachers-grid { grid-template-columns: repeat(2, 1fr); }
+    .teachers-group-banner { flex-direction: column; text-align: center; }
+    .banner-faces { justify-content: center; }
+    .banner-stats { justify-content: center; }
+
+    /* Gallery */
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.tall, .gallery-item.wide { grid-column: auto; grid-row: auto; aspect-ratio: 1; }
+
+    /* Reviews */
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — MOBILE (≤600px)
+  ═══════════════════════════════════════════════ */
+  @media (max-width: 600px) {
+    section { padding: 5rem 5%; }
+
+    /* Nav */
+    .nav-cta { display: none; }
+
+    /* Hero */
+    #hero { padding: 6rem 5% 3rem; }
+    .hero-title { font-size: clamp(2.4rem, 9vw, 3rem); }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions a { text-align: center; }
+
+    /* Stats */
+    .stats-strip { gap: 1.5rem; flex-wrap: wrap; justify-content: space-around; }
+    .stat { min-width: 40%; }
+
+    /* Steps */
+    .steps { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+
+    /* Courses */
+    .courses-grid { grid-template-columns: 1fr; }
+    .courses-header { gap: 1rem; }
+
+    /* Teachers */
+    .teachers-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+    .teacher-card { padding: 1.2rem 0.8rem; }
+    .teacher-avatar-inner { font-size: 2rem; width: 54px; height: 54px; }
+    .teacher-name { font-size: 0.9rem; }
+    .teacher-origin { font-size: 0.7rem; }
+    .teacher-tags { gap: 0.3rem; }
+    .teacher-tag { font-size: 0.62rem; padding: 0.2rem 0.5rem; }
+
+    /* Gallery */
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+
+    /* Reviews */
+    .reviews-grid { grid-template-columns: 1fr; }
+
+    /* Trial */
+    #trial h2 { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+
+    /* Banner */
+    .teachers-group-banner { padding: 1.5rem; }
+    .banner-stats { gap: 1.5rem; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     RESPONSIVE — TINY MOBILE (≤380px)
+  ═══════════════════════════════════════════════ */
+  @media (max-width: 380px) {
+    .teachers-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .teacher-card { padding: 1rem 0.6rem; }
+    .lang-btn span:last-of-type { display: none; } /* hide code, keep flag */
+    .stats-strip { gap: 1rem; }
+    .stat { min-width: 45%; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     TEXT COLOUR FIXES — ensure nothing is white on white
+  ═══════════════════════════════════════════════ */
+  /* btn-ghost must always be visible */
+  .btn-ghost { color: var(--cool1) !important; }
+  /* on dark backgrounds the ghost button inverts */
+  #trial .btn-ghost,
+  #teachers .btn-ghost,
+  .stats-strip .btn-ghost { color: white !important; border-color: rgba(255,255,255,0.5) !important; }
+  #trial .btn-ghost:hover,
+  #teachers .btn-ghost:hover { background: rgba(255,255,255,0.15) !important; }
+
+  /* Cart button: white text explicitly */
+  .cart-btn { color: white; }
+
+  /* section-tag colour on dark sections */
+  #teachers .section-tag,
+  #about .section-tag,
+  #trial .section-tag { color: var(--warm2); }
+
+  /* section-sub readable on dark */
+  #teachers .section-sub { color: rgba(255,255,255,0.65); }
+  #about .section-sub { color: rgba(255,255,255,0.65); }
+
+  /* Teacher card texts */
+  .teacher-origin { color: rgba(255,255,255,0.55); }
+  .teacher-name { color: white; }
+  .teacher-role { color: rgba(255,255,255,0.8); }
+  .teacher-tag { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.75); }
+
+  /* About values on dark bg */
+  .about-val-text p { color: rgba(255,255,255,0.6); }
+
+  /* Review card text */
+  .review-text { color: var(--text); }
+  .review-author { color: var(--dark); font-weight: 600; }
+  .review-country { color: var(--text); opacity: 0.6; font-size: 0.82rem; }
+
+  /* Cart drawer — white bg, needs dark text */
+  .cart-head h3 { color: var(--dark); }
+  .cart-item-name { color: var(--dark); }
+  .cart-item-price { color: var(--text); opacity: 0.7; }
+  .empty-cart p { color: var(--text); }
+
+  /* Course cards — white bg */
+  .course-name { color: var(--dark) !important; }
+  .course-level { color: var(--cool1) !important; }
+  .course-desc { color: var(--text) !important; }
+  .course-price { color: var(--dark) !important; }
+
+  /* Video section */
+  #video { background: var(--light); }
+  #video .section-title { color: var(--dark); }
+  #video .section-sub { color: var(--text); }
+  #video .section-tag { color: var(--warm1); }
+
+  /* Gallery load more */
+  .gallery-load .btn-ghost { color: var(--cool1) !important; border-color: rgba(91,91,214,0.35) !important; }
+
+  /* Footer bottom text */
+  .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+
+  /* Banner text */
+  .banner-text h3 { color: white; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; }
+  .banner-text h3 em { color: var(--warm2); font-style: italic; }
+  .banner-text p { color: rgba(255,255,255,0.6); font-size: 0.88rem; line-height: 1.7; }
+  .banner-stat-n { color: white; font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .banner-stat-l { color: rgba(255,255,255,0.5); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Lingua<span>World</span></div>
+  <ul class="nav-links">
+    <li><a href="#how" data-i18n="nav.how">How It Works</a></li>
+    <li><a href="#courses" data-i18n="nav.courses">Courses</a></li>
+    <li><a href="#teachers" data-i18n="nav.teachers">Our Teachers</a></li>
+    <li><a href="#reviews" data-i18n="nav.reviews">Reviews</a></li>
+    <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <div class="lang-switcher" id="langSwitcher">
+      <button class="lang-btn" id="langBtn">
+        <span class="lang-flag" id="langFlag">🇬🇧</span>
+        <span id="langCode">EN</span>
+        <span class="lang-arrow">▼</span>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-option active" data-lang="en"><span class="lf">🇬🇧</span> English</div>
+        <div class="lang-option" data-lang="fr"><span class="lf">🇫🇷</span> Français</div>
+        <div class="lang-option" data-lang="ar"><span class="lf">🇸🇦</span> العربية</div>
+        <div class="lang-option" data-lang="es"><span class="lf">🇪🇸</span> Español</div>
+        <div class="lang-option" data-lang="pt"><span class="lf">🇧🇷</span> Português</div>
+        <div class="lang-option" data-lang="ja"><span class="lf">🇯🇵</span> 日本語</div>
+      </div>
+    </div>
+    <a href="#trial" class="nav-cta" data-i18n="nav.cta">Free Trial Lesson</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <!-- Welcome words canvas background -->
+  <canvas id="heroCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.55;"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="dot"></div>
+      <span data-i18n="hero.eyebrow">Connecting the World Through Language</span>
+    </div>
+    <h1 class="hero-title" data-i18n="hero.title">
+      English for<br>
+      <em>every voice,</em><br>
+      every story
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">
+      Live online English lessons with passionate teachers — designed for students from every corner of the world. Your language journey starts here.
+    </p>
+    <div class="hero-actions">
+      <a href="#trial" class="btn-primary" data-i18n="hero.cta1">Book a Free Trial →</a>
+      <a href="#courses" class="btn-ghost" data-i18n="hero.cta2">Explore Courses</a>
+    </div>
+  </div>
+
+  <!-- Floating World Visual -->
+  <div class="hero-visual">
+    <div style="position:relative; width:100%; padding-bottom:100%; overflow:hidden;">
+      <!-- Central globe SVG -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="globeGrad" cx="40%" cy="35%">
+            <stop offset="0%" stop-color="#B8BFFF"/>
+            <stop offset="100%" stop-color="#5B5BD6"/>
+          </radialGradient>
+          <radialGradient id="glowGrad" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#FF6B35" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Glow ring -->
+        <circle cx="250" cy="250" r="200" fill="url(#glowGrad)"/>
+        <!-- Globe -->
+        <circle cx="250" cy="250" r="155" fill="url(#globeGrad)" opacity="0.9"/>
+        <!-- Latitude lines -->
+        <ellipse cx="250" cy="250" rx="155" ry="50" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/>
+        <ellipse cx="250" cy="250" rx="155" ry="100" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none"/>
+        <ellipse cx="250" cy="200" rx="130" ry="40" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+        <!-- Longitude lines -->
+        <path d="M250 95 Q320 250 250 405" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/>
+        <path d="M250 95 Q180 250 250 405" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" fill="none"/>
+        <path d="M250 95 Q380 250 250 405" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+        <path d="M250 95 Q120 250 250 405" stroke="rgba(255,255,255,0.12)" stroke-width="1" fill="none"/>
+        <!-- Land masses (abstract) -->
+        <path d="M210 180 Q240 160 270 175 Q290 185 285 210 Q275 230 255 225 Q230 220 215 205 Z" fill="rgba(255,255,255,0.25)"/>
+        <path d="M170 230 Q200 215 220 230 Q235 245 225 265 Q210 280 190 275 Q170 265 165 248 Z" fill="rgba(255,255,255,0.2)"/>
+        <path d="M270 240 Q300 228 315 248 Q325 265 310 278 Q292 285 278 272 Q265 258 268 245 Z" fill="rgba(255,255,255,0.18)"/>
+        <path d="M225 300 Q245 290 262 305 Q272 318 260 330 Q244 338 230 328 Q220 315 225 300 Z" fill="rgba(255,255,255,0.15)"/>
+        <!-- Shine -->
+        <ellipse cx="205" cy="195" rx="35" ry="22" fill="rgba(255,255,255,0.18)" style="filter:blur(8px)"/>
+        <!-- Orbit rings -->
+        <ellipse cx="250" cy="250" rx="190" ry="55" stroke="rgba(255,107,53,0.2)" stroke-width="1.5" fill="none" transform="rotate(-20 250 250)" stroke-dasharray="4 6"/>
+        <ellipse cx="250" cy="250" rx="200" ry="60" stroke="rgba(91,91,214,0.2)" stroke-width="1.5" fill="none" transform="rotate(40 250 250)" stroke-dasharray="4 6"/>
+        <!-- Connection dots -->
+        <circle cx="180" cy="210" r="5" fill="#FF6B35" opacity="0.8"/>
+        <circle cx="310" cy="180" r="5" fill="#FFB347" opacity="0.8"/>
+        <circle cx="300" cy="310" r="5" fill="#9B59B6" opacity="0.8"/>
+        <circle cx="175" cy="300" r="5" fill="#5B5BD6" opacity="0.8"/>
+        <circle cx="250" cy="145" r="5" fill="#FF6B35" opacity="0.8"/>
+        <!-- Connection lines -->
+        <line x1="180" y1="210" x2="310" y2="180" stroke="rgba(255,179,71,0.3)" stroke-width="1"/>
+        <line x1="310" y1="180" x2="300" y2="310" stroke="rgba(155,89,182,0.3)" stroke-width="1"/>
+        <line x1="300" y1="310" x2="175" y2="300" stroke="rgba(91,91,214,0.3)" stroke-width="1"/>
+        <line x1="175" y1="300" x2="250" y2="145" stroke="rgba(255,107,53,0.3)" stroke-width="1"/>
+        <line x1="250" y1="145" x2="180" y2="210" stroke="rgba(91,91,214,0.3)" stroke-width="1"/>
+      </svg>
+      <!-- Floating pills — inside overflow:hidden container, never escape -->
+      <div class="flag-pill" style="position:absolute;top:8%;left:5%;--dur:7s;--delay:0s;--rot:-3deg">
+        <span class="flag">🇯🇵</span> Tokyo
+      </div>
+      <div class="flag-pill" style="position:absolute;top:15%;right:2%;--dur:6s;--delay:-2s;--rot:4deg">
+        <span class="flag">🇧🇷</span> São Paulo
+      </div>
+      <div class="flag-pill" style="position:absolute;top:50%;right:2%;--dur:8s;--delay:-1s;--rot:-2deg">
+        <span class="flag">🇸🇦</span> Riyadh
+      </div>
+      <div class="flag-pill" style="position:absolute;bottom:20%;right:2%;--dur:7s;--delay:-4s;--rot:3deg">
+        <span class="flag">🇫🇷</span> Paris
+      </div>
+      <div class="flag-pill" style="position:absolute;bottom:8%;left:10%;--dur:6s;--delay:-3s;--rot:-4deg">
+        <span class="flag">🇳🇬</span> Lagos
+      </div>
+      <div class="flag-pill" style="position:absolute;top:38%;left:2%;--dur:9s;--delay:-5s;--rot:2deg">
+        <span class="flag">🇮🇳</span> Mumbai
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat reveal">
+    <div class="stat-number">2,400+</div>
+    <div class="stat-label" data-i18n="stats.students">Students Worldwide</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-number">48</div>
+    <div class="stat-label" data-i18n="stats.countries">Countries Reached</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-number">98%</div>
+    <div class="stat-label" data-i18n="stats.satisfaction">Satisfaction Rate</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-number">12</div>
+    <div class="stat-label" data-i18n="stats.teachers">Expert Teachers</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-header reveal">
+    <span class="section-tag" data-i18n="how.tag">Simple & Clear</span>
+    <h2 class="section-title" data-i18n="how.title">How to get started</h2>
+    <p class="section-sub" data-i18n="how.sub">From booking to your first lesson in four easy steps — no confusion, no friction.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-icon">🎁</div>
+      <h3 data-i18n="how.step1.title">Book a Free Trial</h3>
+      <p data-i18n="how.step1.text">Choose a free 30-minute trial lesson with one of our teachers. Zero commitment, no credit card needed.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-icon">📅</div>
+      <h3 data-i18n="how.step2.title">Select Availability</h3>
+      <p data-i18n="how.step2.text">Browse our live calendar and pick a time slot that fits your schedule — we work across all time zones.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-icon">📧</div>
+      <h3 data-i18n="how.step3.title">Receive Your Zoom Link</h3>
+      <p data-i18n="how.step3.text">You'll get an instant confirmation email with your unique Zoom link — just one click to join.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div class="step-icon">🌟</div>
+      <h3 data-i18n="how.step4.title">Meet Your Teacher</h3>
+      <p data-i18n="how.step4.text">Connect live, start learning, and discover the course that's right for you. Learning begins here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="courses-header">
+    <div>
+      <span class="section-tag" data-i18n="courses.tag">Our Programmes</span>
+      <h2 class="section-title" data-i18n="courses.title">Find your perfect <em>course</em></h2>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+      <button class="cart-btn" id="cartToggle">
+        🛒 <span data-i18n="courses.cart">View Cart</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="courses-grid" id="coursesGrid">
+    <!-- Cards generated by JS -->
+  </div>
+</section>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Your Selected Courses</h3>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="empty-cart"><div class="e">🛒</div><p>Your cart is empty</p></div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">$0</strong>
+    </div>
+    <a href="#" class="btn-primary checkout-btn" style="display:block;text-align:center;">Proceed to Checkout →</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <span class="section-tag" data-i18n="about.tag">About LinguaWorld</span>
+      <h2 class="section-title" data-i18n="about.title">Teaching English <em>with heart,</em> across borders</h2>
+      <p class="section-sub" data-i18n="about.sub">We're a team of passionate English educators who believe language opens every door. Our students come from over 48 countries — and we celebrate every single one of them.</p>
+      <div class="about-values">
+        <div class="about-val">
+          <div class="about-val-icon">🌍</div>
+          <div class="about-val-text">
+            <h4 data-i18n="about.v1.title">Globally Inclusive</h4>
+            <p data-i18n="about.v1.text">Every background, every culture — all welcome at LinguaWorld.</p>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">💬</div>
+          <div class="about-val-text">
+            <h4 data-i18n="about.v2.title">Live, Human Connection</h4>
+            <p data-i18n="about.v2.text">Real teachers, real conversations — not bots or pre-recorded lectures.</p>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">📈</div>
+          <div class="about-val-text">
+            <h4 data-i18n="about.v3.title">Proven Progress</h4>
+            <p data-i18n="about.v3.text">Structured courses with measurable results and personal milestones.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal" style="display:flex;flex-direction:column;gap:1.2rem;">
+      <!-- Mini stat cards -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:1.5rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;background:linear-gradient(135deg,#FF6B35,#FFB347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">48</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem;">Countries</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:1.5rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;background:linear-gradient(135deg,#5B5BD6,#9B59B6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">98%</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem;">Satisfaction</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:1.5rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;background:linear-gradient(135deg,#E91E8C,#FF6B35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">2.4k</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem;">Students</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:1.5rem;text-align:center;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;background:linear-gradient(135deg,#27AE60,#00B4DB);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">12</div>
+          <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem;">Teachers</div>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(255,107,53,0.12),rgba(91,91,214,0.12));border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:1.8rem;display:flex;align-items:center;gap:1.2rem;">
+        <div style="font-size:2.5rem;">🏆</div>
+        <div>
+          <div style="font-size:0.95rem;font-weight:500;color:white;margin-bottom:0.3rem;">Top-Rated Platform 2024</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);">Voted best online English school by students across 6 regions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHERS -->
+<section id="teachers">
+  <div class="teachers-header reveal">
+    <span class="section-tag" data-i18n="teachers.tag">Meet the Team</span>
+    <h2 class="section-title" style="color:white;" data-i18n="teachers.title">The people behind <em>your progress</em></h2>
+    <p class="section-sub" data-i18n="teachers.sub">Certified, passionate, and from around the world — just like our students.</p>
+  </div>
+
+  <div class="teachers-grid">
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#FF6B35,#FFB347);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👩🏻</div>
+        <div class="teacher-flag">🇬🇧</div>
+      </div>
+      <div class="teacher-name">Sarah Mitchell</div>
+      <div class="teacher-origin">London, UK</div>
+      <div class="teacher-role">Lead Educator</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">CELTA</span>
+        <span class="teacher-tag">Business</span>
+        <span class="teacher-tag">IELTS</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#5B5BD6,#9B59B6);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👨🏿</div>
+        <div class="teacher-flag">🇬🇭</div>
+      </div>
+      <div class="teacher-name">Marcus Osei</div>
+      <div class="teacher-origin">Accra, Ghana</div>
+      <div class="teacher-role">Business English</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">C2 Proficient</span>
+        <span class="teacher-tag">Presentations</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#27AE60,#2ECC71);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👩🏽</div>
+        <div class="teacher-flag">🇮🇳</div>
+      </div>
+      <div class="teacher-name">Priya Sharma</div>
+      <div class="teacher-origin">Mumbai, India</div>
+      <div class="teacher-role">Conversation & IELTS</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">Fluency</span>
+        <span class="teacher-tag">IELTS 8.5</span>
+        <span class="teacher-tag">Pronunciation</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#E91E8C,#FF6B35);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👨🏻</div>
+        <div class="teacher-flag">🇺🇸</div>
+      </div>
+      <div class="teacher-name">James Calloway</div>
+      <div class="teacher-origin">New York, USA</div>
+      <div class="teacher-role">Exam Preparation</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">Cambridge</span>
+        <span class="teacher-tag">TOEFL</span>
+        <span class="teacher-tag">Academic</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#00B4DB,#5B5BD6);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👩🏾</div>
+        <div class="teacher-flag">🇿🇦</div>
+      </div>
+      <div class="teacher-name">Amara Dlamini</div>
+      <div class="teacher-origin">Cape Town, SA</div>
+      <div class="teacher-role">Beginners Specialist</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">Foundations</span>
+        <span class="teacher-tag">Kids & Adults</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#F7971E,#FFD200);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👨🏻‍🦱</div>
+        <div class="teacher-flag">🇦🇺</div>
+      </div>
+      <div class="teacher-name">Liam Fletcher</div>
+      <div class="teacher-origin">Sydney, Australia</div>
+      <div class="teacher-role">Culture & Slang</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">Idioms</span>
+        <span class="teacher-tag">Native Speaker</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#9B59B6,#5B5BD6);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👩🏻‍🦰</div>
+        <div class="teacher-flag">🇮🇪</div>
+      </div>
+      <div class="teacher-name">Siobhan Kelly</div>
+      <div class="teacher-origin">Dublin, Ireland</div>
+      <div class="teacher-role">Pronunciation</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">Phonetics</span>
+        <span class="teacher-tag">Accent</span>
+        <span class="teacher-tag">Speaking</span>
+      </div>
+    </div>
+
+    <div class="teacher-card reveal" style="--card-gradient: linear-gradient(135deg,#FF6B35,#E91E8C);">
+      <div class="teacher-avatar-wrap">
+        <div class="teacher-avatar-inner">👨🏽</div>
+        <div class="teacher-flag">🇧🇷</div>
+      </div>
+      <div class="teacher-name">Rafael Costa</div>
+      <div class="teacher-origin">São Paulo, Brazil</div>
+      <div class="teacher-role">Conversational</div>
+      <div class="teacher-tags">
+        <span class="teacher-tag">Intermediate</span>
+        <span class="teacher-tag">Everyday English</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="teachers-group-banner reveal">
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+      <div class="banner-faces">
+        <div class="banner-face">👩🏻</div>
+        <div class="banner-face">👨🏿</div>
+        <div class="banner-face">👩🏽</div>
+        <div class="banner-face">👨🏻</div>
+        <div class="banner-face">👩🏾</div>
+        <div class="banner-face">👨🏻‍🦱</div>
+        <div class="banner-face">👩🏻‍🦰</div>
+        <div class="banner-face">👨🏽</div>
+      </div>
+      <div class="banner-text">
+        <h3 data-i18n="teachers.banner.title">One team. <em>Every timezone.</em></h3>
+        <p data-i18n="teachers.banner.sub">Our teachers are available 7 days a week across all time zones — wherever you are in the world.</p>
+      </div>
+    </div>
+    <div class="banner-stats">
+      <div class="banner-stat">
+        <div class="banner-stat-n">12</div>
+        <div class="banner-stat-l">Teachers</div>
+      </div>
+      <div class="banner-stat">
+        <div class="banner-stat-n">6</div>
+        <div class="banner-stat-l">Continents</div>
+      </div>
+      <div class="banner-stat">
+        <div class="banner-stat-n">7/7</div>
+        <div class="banner-stat-l">Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video" style="padding-top:6rem;padding-bottom:6rem;">
+  <span class="section-tag" data-i18n="video.tag">See Us in Action</span>
+  <h2 class="section-title" style="text-align:center;" data-i18n="video.title">Watch how LinguaWorld <em>works</em></h2>
+  <p class="section-sub" style="text-align:center;margin:0 auto 0;" data-i18n="video.sub">Get a feel for our teaching style, our team, and what a typical lesson looks like.</p>
+  <div class="video-container reveal">
+    <div class="video-placeholder">
+      <div class="play-btn">▶</div>
+      <p data-i18n="video.soon">Our story — coming soon</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <span class="section-tag" data-i18n="gallery.tag">Our World</span>
+    <h2 class="section-title" data-i18n="gallery.title">Moments from <em>around the globe</em></h2>
+    <p class="section-sub" style="margin:0 auto;" data-i18n="gallery.sub">As we travel internationally, this gallery grows. Check back often — more stories ahead.</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <!-- Row 1-2, Col 1: tall item -->
+    <div class="gallery-item tall" style="--g1:#FF6B35;--g2:#FFB347;">
+      🏙️
+      <div class="overlay"><span class="overlay-text" data-i18n="gallery.i1">Online Learning Community</span></div>
+    </div>
+    <!-- Row 1, Col 2 -->
+    <div class="gallery-item" style="--g1:#5B5BD6;--g2:#9B59B6;">
+      🎓
+      <div class="overlay"><span class="overlay-text" data-i18n="gallery.i2">Graduation Moments</span></div>
+    </div>
+    <!-- Row 1, Col 3-4: wide item -->
+    <div class="gallery-item wide" style="--g1:#27AE60;--g2:#00B4DB;">
+      🌏
+      <div class="overlay"><span class="overlay-text" data-i18n="gallery.i4">International Tour 2025 — Coming Soon</span></div>
+    </div>
+    <!-- Row 2, Col 2 -->
+    <div class="gallery-item" style="--g1:#E91E8C;--g2:#FF6B35;">
+      🌸
+      <div class="overlay"><span class="overlay-text" data-i18n="gallery.i3">Cultural Exchange</span></div>
+    </div>
+    <!-- Row 2, Col 3 -->
+    <div class="gallery-item" style="--g1:#F7971E;--g2:#FFD200;">
+      📚
+      <div class="overlay"><span class="overlay-text" data-i18n="gallery.i5">Lesson Highlights</span></div>
+    </div>
+    <!-- Row 2, Col 4 -->
+    <div class="gallery-item" style="--g1:#00B4DB;--g2:#5B5BD6;">
+      🎤
+      <div class="overlay"><span class="overlay-text" data-i18n="gallery.i6">Speaking Workshops</span></div>
+    </div>
+  </div>
+  <div class="gallery-load reveal">
+    <a href="#" class="btn-ghost" style="margin-top:2rem;display:inline-block;" data-i18n="gallery.load">Load More Photos</a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-header reveal">
+    <span class="section-tag" data-i18n="reviews.tag">Student Voices</span>
+    <h2 class="section-title" data-i18n="reviews.title">What our students <em>say</em></h2>
+    <p class="section-sub" style="margin:0 auto;" data-i18n="reviews.sub">Real progress, real people — from every corner of the world.</p>
+  </div>
+  <div class="reviews-grid" id="reviewsGrid"></div>
+</section>
+
+<!-- TRIAL CTA -->
+<section id="trial">
+  <div class="trial-content reveal">
+    <span class="section-tag" data-i18n="trial.tag">Start Today</span>
+    <h2 data-i18n="trial.title">Your first lesson is<br><em>completely free.</em></h2>
+    <p data-i18n="trial.sub">No commitment. No credit card. Just 30 minutes that could change everything.</p>
+    <a href="#" class="trial-btn" data-i18n="trial.cta">Book My Free Trial →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Lingua<span>World</span></div>
+      <p data-i18n="footer.tagline">English lessons for students from every culture, every background, every timezone. We believe language connects us all.</p>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.learn">Learn</h5>
+      <a href="#" data-i18n="footer.allcourses">All Courses</a>
+      <a href="#" data-i18n="footer.beginner">Beginner English</a>
+      <a href="#" data-i18n="footer.business">Business English</a>
+      <a href="#" data-i18n="footer.ielts">IELTS Preparation</a>
+      <a href="#" data-i18n="footer.conversation">Conversation Classes</a>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.company">Company</h5>
+      <a href="#" data-i18n="footer.about">About Us</a>
+      <a href="#" data-i18n="footer.teachers">Our Teachers</a>
+      <a href="#" data-i18n="footer.gallery">Gallery</a>
+      <a href="#" data-i18n="footer.reviews">Student Reviews</a>
+      <a href="#" data-i18n="footer.blog">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.contact">Contact</h5>
+      <a href="#" data-i18n="footer.booktrial">Book a Trial</a>
+      <a href="#"><span class="__cf_email__" data-cfemail="2048454c4c4f604c494e475541574f524c440e434f4d">[email&#160;protected]</span></a>
+      <a href="#" data-i18n="footer.whatsapp">WhatsApp Us</a>
+      <a href="#" data-i18n="footer.faq">FAQ</a>
+      <a href="#" data-i18n="footer.support">Support</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-i18n="footer.copy">© 2025 LinguaWorld. All rights reserved.</p>
+    <div class="socials">
+      <a href="#" class="social-link">📘</a>
+      <a href="#" class="social-link">📸</a>
+      <a href="#" class="social-link">🐦</a>
+      <a href="#" class="social-link">💼</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ════════════════════════════════════════
+// ─── WELCOME SPLASH ANIMATION ───
+// ════════════════════════════════════════
+const welcomeWords = [
+  { text: 'Welcome',     lang: 'English',    size: 72, color: '#FF6B35' },
+  { text: 'Bienvenue',   lang: 'Français',   size: 58, color: '#FFB347' },
+  { text: 'مرحباً',      lang: 'عربي',       size: 64, color: '#9B59B6' },
+  { text: 'Bienvenido',  lang: 'Español',    size: 60, color: '#5B5BD6' },
+  { text: 'Benvenuto',   lang: 'Italiano',   size: 58, color: '#FF6B35' },
+  { text: 'Willkommen',  lang: 'Deutsch',    size: 52, color: '#FFB347' },
+  { text: 'Bem-vindo',   lang: 'Português',  size: 58, color: '#E91E8C' },
+  { text: 'ようこそ',    lang: '日本語',      size: 66, color: '#FF6B35' },
+  { text: '欢迎',        lang: '中文',        size: 80, color: '#5B5BD6' },
+  { text: 'Добро пожаловать', lang: 'Русский', size: 40, color: '#9B59B6' },
+  { text: 'স্বাগতম',   lang: 'বাংলা',      size: 55, color: '#FFB347' },
+  { text: 'Karibu',      lang: 'Kiswahili',  size: 62, color: '#27AE60' },
+  { text: 'Hoşgeldiniz', lang: 'Türkçe',    size: 50, color: '#FF6B35' },
+  { text: '환영합니다',  lang: '한국어',      size: 54, color: '#5B5BD6' },
+  { text: 'Chào mừng',   lang: 'Tiếng Việt', size: 56, color: '#E91E8C' },
+  { text: 'Witaj',       lang: 'Polski',     size: 62, color: '#FFB347' },
+  { text: 'Ahlan',       lang: 'عربي',       size: 60, color: '#9B59B6' },
+  { text: 'Sveiki',      lang: 'Latviski',   size: 60, color: '#27AE60' },
+  { text: 'مرحبا',       lang: 'Darija',     size: 62, color: '#FF6B35' },
+  { text: 'Bun venit',   lang: 'Română',     size: 56, color: '#5B5BD6' },
+];
+
+// ════════════════════════════════════════
+// ─── HERO CANVAS ANIMATION ───
+// ════════════════════════════════════════
+function initHeroCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let animFrame;
+
+  function resize() {
+    const hero = document.getElementById('hero');
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+    // Recompute word positions when canvas resizes
+    wordObjs.forEach(w => initWordPos(w));
+  }
+
+  const CX = () => canvas.width  / 2;
+  const CY = () => canvas.height / 2;
+
+  // Smooth noise: sum of incommensurable sinusoids → never repeats
+  function smoothNoise(t, seed) {
+    const s = seed * 1.618;
+    return (
+      Math.sin(t * 0.00023 + s)       * 0.45 +
+      Math.sin(t * 0.00041 + s * 2.1) * 0.30 +
+      Math.sin(t * 0.00067 + s * 0.7) * 0.15 +
+      Math.sin(t * 0.00011 + s * 3.3) * 0.10
+    );
+  }
+
+  function initWordPos(w) {
+    // Spread words across the canvas in a loose grid with jitter
+    const i   = w.index;
+    const n   = welcomeWords.length;
+    const col = i % 4;
+    const row = Math.floor(i / 4);
+    const cols = 4, rows = Math.ceil(n / cols);
+    // Base position as fraction of canvas
+    w.baseX = (col + 0.5) / cols;
+    w.baseY = (row + 0.5) / rows;
+    // Random offset so words don't sit on a perfect grid
+    w.jx = (Math.random() - 0.5) * 0.12;
+    w.jy = (Math.random() - 0.5) * 0.08;
+  }
+
+  // Build word objects
+  const wordObjs = welcomeWords.map((w, i) => {
+    const obj = {
+      text:  w.text,
+      color: w.color,
+      size:  Math.min(w.size * 0.52, 40),
+      index: i,
+      // Unique seeds for independent movement per axis
+      seedX: Math.random() * 100,
+      seedY: Math.random() * 100,
+      // Drift amplitude (fraction of canvas)
+      ampX: 0.06 + Math.random() * 0.05,
+      ampY: 0.04 + Math.random() * 0.04,
+      // Opacity seed
+      seedO: Math.random() * 100,
+      baseX: 0, baseY: 0, jx: 0, jy: 0,
+    };
+    return obj;
+  });
+
+  // Init canvas once DOM ready
+  resize();
+  window.addEventListener('resize', resize);
+
+  // ── INTRO phase ──
+  const WORD_DURATION = 320;   // ms per word — slightly slower = smoother
+  const SEQUENCE_END  = welcomeWords.length * WORD_DURATION;
+  let startTime   = null;
+  let sequenceDone = false;
+
+  // Crossfade: current word fades out while next fades in simultaneously
+  function draw(now) {
+    if (!startTime) startTime = now;
+    const t = now - startTime;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (!sequenceDone) {
+      // ── INTRO: smooth crossfade between words ──
+      const FADE = 110; // ms overlap crossfade
+      const progress = t / WORD_DURATION;
+      const cur  = Math.min(Math.floor(progress), welcomeWords.length - 1);
+      const next = Math.min(cur + 1, welcomeWords.length - 1);
+      const frac = progress - Math.floor(progress); // 0→1 within current slot
+
+      // Alpha for current word: full until FADE before end, then fade out
+      const fadeStart = 1 - FADE / WORD_DURATION;
+      const alphaOut  = frac < fadeStart ? 1 : Math.max(0, 1 - (frac - fadeStart) / (FADE / WORD_DURATION));
+      // Alpha for next word: starts fading in at fadeStart
+      const alphaIn   = frac < fadeStart ? 0 : Math.min(1, (frac - fadeStart) / (FADE / WORD_DURATION));
+
+      const drawWord = (w, alpha) => {
+        if (alpha < 0.01) return;
+        const fontSize = Math.min(w.size * 1.2, canvas.width * 0.10);
+        // Gentle scale: grows slightly as it fades in
+        const scale = 0.88 + alpha * 0.12;
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(CX(), CY());
+        ctx.scale(scale, scale);
+        ctx.font = `300 ${fontSize}px 'Cormorant Garamond', serif`;
+        ctx.fillStyle = w.color;
+        ctx.shadowColor = w.color;
+        ctx.shadowBlur = 40;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(w.text, 0, 0);
+        ctx.restore();
+        // Language subtitle
+        const subSize = Math.min(12, canvas.width * 0.016);
+        const subY    = CY() + Math.min(fontSize * 0.68, 58) * scale;
+        ctx.save();
+        ctx.globalAlpha = alpha * 0.45;
+        ctx.font = `400 ${subSize}px 'DM Sans', sans-serif`;
+        ctx.fillStyle = w.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(w.lang.toUpperCase(), CX(), subY);
+        ctx.restore();
+      };
+
+      drawWord(welcomeWords[cur],  alphaOut);
+      if (cur !== next) drawWord(welcomeWords[next], alphaIn);
+
+      if (t >= SEQUENCE_END) sequenceDone = true;
+
+    } else {
+      // ── AMBIENT: smooth organic drift via noise ──
+      const et = t - SEQUENCE_END;
+
+      wordObjs.forEach(w => {
+        // Position: base + jitter + smooth noise drift
+        const nx = smoothNoise(et, w.seedX);
+        const ny = smoothNoise(et, w.seedY);
+        const x  = (w.baseX + w.jx + nx * w.ampX) * canvas.width;
+        const y  = (w.baseY + w.jy + ny * w.ampY) * canvas.height;
+
+        // Opacity: slow gentle breathing, never too bright
+        const no  = smoothNoise(et, w.seedO);
+        const alpha = 0.09 + 0.10 * (no * 0.5 + 0.5);
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.font = `300 ${w.size}px 'Cormorant Garamond', serif`;
+        ctx.fillStyle = w.color;
+        ctx.shadowColor = w.color;
+        ctx.shadowBlur = 12;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(w.text, x, y);
+        ctx.restore();
+      });
+    }
+
+    animFrame = requestAnimationFrame(draw);
+  }
+
+  animFrame = requestAnimationFrame(draw);
+}
+
+// ════════════════════════════════════════
+// ─── CURSOR TRAIL ─── (Le Petit Truc)
+// ════════════════════════════════════════
+function initCursor() {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  const sparks = [];
+  let lastX = 0, lastY = 0, lastTime = 0;
+
+  const COLORS = ['#FF6B35','#FFB347','#9B59B6','#5B5BD6','#E91E8C','#27AE60','#FFD200'];
+
+  function createSpark(x, y, speed) {
+    if (speed < 2) return;
+    const s = document.createElement('div');
+    s.className = 'cursor-spark';
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    s.style.cssText = `background:${color};opacity:0.9;`;
+    document.body.appendChild(s);
+    const angle = Math.random() * Math.PI * 2;
+    const v = 1 + Math.random() * 3;
+    const life = 400 + Math.random() * 300;
+    let vx = Math.cos(angle) * v, vy = Math.sin(angle) * v - 2;
+    let px = x, py = y, start = Date.now();
+    sparks.push(s);
+
+    function animSpark() {
+      const elapsed = Date.now() - start;
+      const progress = elapsed / life;
+      if (progress >= 1) { s.remove(); sparks.splice(sparks.indexOf(s),1); return; }
+      px += vx; py += vy; vy += 0.12;
+      const scale = 1 - progress;
+      s.style.left = px + 'px';
+      s.style.top = py + 'px';
+      s.style.opacity = (1 - progress) * 0.8;
+      s.style.transform = `translate(-50%,-50%) scale(${scale})`;
+      requestAnimationFrame(animSpark);
+    }
+    requestAnimationFrame(animSpark);
+  }
+
+  let cursorVisible = false;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    if (!cursorVisible) {
+      cursorVisible = true;
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+    }
+    const now = Date.now();
+    const dx = mx - lastX, dy = my - lastY;
+    const speed = Math.sqrt(dx*dx+dy*dy) / Math.max(1, now - lastTime) * 16;
+    if (now - lastTime > 30) {
+      createSpark(mx, my, speed);
+      lastX = mx; lastY = my; lastTime = now;
+    }
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+  });
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.width = '20px'; dot.style.height = '20px';
+      ring.style.width = '52px'; ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(255,107,53,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.width = '10px'; dot.style.height = '10px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(255,107,53,0.5)';
+    });
+  });
+
+  // Lag for ring
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+}
+
+// ════════════════════════════════════════
+// ─── I18N TRANSLATIONS ───
+// ════════════════════════════════════════
+const translations = {
+  en: {
+    'dir': 'ltr',
+    'nav.how': 'How It Works', 'nav.courses': 'Courses', 'nav.teachers': 'Our Teachers', 'nav.reviews': 'Reviews', 'nav.gallery': 'Gallery', 'nav.cta': 'Free Trial Lesson',
+    'hero.eyebrow': 'Connecting the World Through Language',
+    'hero.title': 'English for<br><em>every voice,</em><br>every story',
+    'hero.sub': 'Live online English lessons with passionate teachers — designed for students from every corner of the world. Your language journey starts here.',
+    'hero.cta1': 'Book a Free Trial →', 'hero.cta2': 'Explore Courses',
+    'stats.students': 'Students Worldwide', 'stats.countries': 'Countries Reached', 'stats.satisfaction': 'Satisfaction Rate', 'stats.teachers': 'Expert Teachers',
+    'how.tag': 'Simple & Clear', 'how.title': 'How to get started', 'how.sub': 'From booking to your first lesson in four easy steps — no confusion, no friction.',
+    'how.step1.title': 'Book a Free Trial', 'how.step1.text': 'Choose a free 30-minute trial lesson. Zero commitment, no credit card needed.',
+    'how.step2.title': 'Select Availability', 'how.step2.text': 'Browse our live calendar and pick a time that fits your schedule — across all time zones.',
+    'how.step3.title': 'Receive Your Zoom Link', 'how.step3.text': 'Get an instant confirmation email with your unique Zoom link — one click to join.',
+    'how.step4.title': 'Meet Your Teacher', 'how.step4.text': 'Connect live, start learning, and discover the course that\'s right for you.',
+    'courses.tag': 'Our Programmes', 'courses.title': 'Find your perfect <em>course</em>', 'courses.cart': 'View Cart',
+    'about.tag': 'About LinguaWorld', 'about.title': 'Teaching English <em>with heart,</em> across borders',
+    'about.sub': 'We\'re a team of passionate English educators who believe language opens every door. Our students come from over 48 countries.',
+    'about.v1.title': 'Globally Inclusive', 'about.v1.text': 'Every background, every culture — all welcome at LinguaWorld.',
+    'about.v2.title': 'Live, Human Connection', 'about.v2.text': 'Real teachers, real conversations — not bots or pre-recorded lectures.',
+    'about.v3.title': 'Proven Progress', 'about.v3.text': 'Structured courses with measurable results and personal milestones.',
+    'teachers.tag': 'Meet the Team', 'teachers.title': 'The people behind <em>your progress</em>', 'teachers.sub': 'Certified, passionate, and from around the world — just like our students.',
+    'teachers.banner.title': 'One team. <em>Every timezone.</em>', 'teachers.banner.sub': 'Our teachers are available 7 days a week across all time zones.',
+    'video.tag': 'See Us in Action', 'video.title': 'Watch how LinguaWorld <em>works</em>', 'video.sub': 'Get a feel for our teaching style, our team, and what a typical lesson looks like.', 'video.soon': 'Our story — coming soon',
+    'gallery.tag': 'Our World', 'gallery.title': 'Moments from <em>around the globe</em>', 'gallery.sub': 'As we travel internationally, this gallery grows. Check back often — more stories ahead.',
+    'gallery.i1': 'Online Learning Community', 'gallery.i2': 'Graduation Moments', 'gallery.i3': 'Cultural Exchange', 'gallery.i4': 'International Tour 2025 — Coming Soon', 'gallery.i5': 'Lesson Highlights', 'gallery.i6': 'Speaking Workshops', 'gallery.i7': 'Student Stories', 'gallery.load': 'Load More Photos',
+    'reviews.tag': 'Student Voices', 'reviews.title': 'What our students <em>say</em>', 'reviews.sub': 'Real progress, real people — from every corner of the world.',
+    'trial.tag': 'Start Today', 'trial.title': 'Your first lesson is<br><em>completely free.</em>', 'trial.sub': 'No commitment. No credit card. Just 30 minutes that could change everything.', 'trial.cta': 'Book My Free Trial →',
+    'footer.tagline': 'English lessons for students from every culture, every background, every timezone.',
+    'footer.learn': 'Learn', 'footer.allcourses': 'All Courses', 'footer.beginner': 'Beginner English', 'footer.business': 'Business English', 'footer.ielts': 'IELTS Preparation', 'footer.conversation': 'Conversation Classes',
+    'footer.company': 'Company', 'footer.about': 'About Us', 'footer.teachers': 'Our Teachers', 'footer.gallery': 'Gallery', 'footer.reviews': 'Student Reviews', 'footer.blog': 'Blog',
+    'footer.contact': 'Contact', 'footer.booktrial': 'Book a Trial', 'footer.whatsapp': 'WhatsApp Us', 'footer.faq': 'FAQ', 'footer.support': 'Support',
+    'footer.copy': '© 2025 LinguaWorld. All rights reserved.',
+  },
+  fr: {
+    'dir': 'ltr',
+    'nav.how': 'Comment ça marche', 'nav.courses': 'Cours', 'nav.teachers': 'Nos Profs', 'nav.reviews': 'Avis', 'nav.gallery': 'Galerie', 'nav.cta': 'Cours d\'essai gratuit',
+    'hero.eyebrow': 'Connecter le monde par le langage',
+    'hero.title': 'L\'anglais pour<br><em>chaque voix,</em><br>chaque histoire',
+    'hero.sub': 'Cours d\'anglais en ligne avec des enseignants passionnés — conçus pour des étudiants du monde entier. Votre aventure linguistique commence ici.',
+    'hero.cta1': 'Réserver un essai gratuit →', 'hero.cta2': 'Explorer les cours',
+    'stats.students': 'Étudiants dans le monde', 'stats.countries': 'Pays atteints', 'stats.satisfaction': 'Taux de satisfaction', 'stats.teachers': 'Enseignants experts',
+    'how.tag': 'Simple & Clair', 'how.title': 'Comment commencer', 'how.sub': 'De la réservation à votre première leçon en quatre étapes simples.',
+    'how.step1.title': 'Réservez un essai gratuit', 'how.step1.text': 'Choisissez une leçon d\'essai gratuite de 30 minutes. Aucun engagement, aucune carte requise.',
+    'how.step2.title': 'Choisissez vos disponibilités', 'how.step2.text': 'Parcourez notre calendrier et choisissez un créneau — nous couvrons tous les fuseaux horaires.',
+    'how.step3.title': 'Recevez votre lien Zoom', 'how.step3.text': 'Vous recevrez immédiatement un e-mail de confirmation avec votre lien Zoom unique.',
+    'how.step4.title': 'Rencontrez votre prof', 'how.step4.text': 'Connectez-vous en direct, commencez à apprendre et trouvez le cours qui vous convient.',
+    'courses.tag': 'Nos Programmes', 'courses.title': 'Trouvez votre <em>cours idéal</em>', 'courses.cart': 'Voir le panier',
+    'about.tag': 'À propos de LinguaWorld', 'about.title': 'Enseigner l\'anglais <em>avec passion,</em> sans frontières',
+    'about.sub': 'Nous sommes une équipe d\'enseignants passionnés qui croient que la langue ouvre toutes les portes. Nos étudiants viennent de plus de 48 pays.',
+    'about.v1.title': 'Inclusivité mondiale', 'about.v1.text': 'Chaque origine, chaque culture — tout le monde est bienvenu chez LinguaWorld.',
+    'about.v2.title': 'Connexion humaine', 'about.v2.text': 'De vrais professeurs, de vraies conversations — pas de robots ni de cours enregistrés.',
+    'about.v3.title': 'Progrès prouvés', 'about.v3.text': 'Des cours structurés avec des résultats mesurables et des étapes personnelles.',
+    'teachers.tag': 'L\'équipe', 'teachers.title': 'Les personnes derrière <em>vos progrès</em>', 'teachers.sub': 'Certifiés, passionnés et du monde entier — comme nos étudiants.',
+    'teachers.banner.title': 'Une équipe. <em>Tous les fuseaux.</em>', 'teachers.banner.sub': 'Nos profs sont disponibles 7j/7 dans tous les fuseaux horaires.',
+    'video.tag': 'Voyez-nous en action', 'video.title': 'Découvrez comment LinguaWorld <em>fonctionne</em>', 'video.sub': 'Découvrez notre style d\'enseignement, notre équipe et à quoi ressemble une leçon type.', 'video.soon': 'Notre histoire — bientôt disponible',
+    'gallery.tag': 'Notre monde', 'gallery.title': 'Moments <em>autour du globe</em>', 'gallery.sub': 'Au fil de nos voyages, cette galerie grandit. Revenez souvent — de nouvelles histoires à venir.',
+    'gallery.i1': 'Communauté d\'apprentissage', 'gallery.i2': 'Moments de remise des diplômes', 'gallery.i3': 'Échange culturel', 'gallery.i4': 'Tour international 2025 — Bientôt', 'gallery.i5': 'Temps forts des cours', 'gallery.i6': 'Ateliers de conversation', 'gallery.i7': 'Témoignages d\'étudiants', 'gallery.load': 'Charger plus de photos',
+    'reviews.tag': 'Voix d\'étudiants', 'reviews.title': 'Ce que disent <em>nos étudiants</em>', 'reviews.sub': 'De vrais progrès, de vraies personnes — des quatre coins du monde.',
+    'trial.tag': 'Commencez aujourd\'hui', 'trial.title': 'Votre première leçon est<br><em>entièrement gratuite.</em>', 'trial.sub': 'Aucun engagement. Aucune carte. Juste 30 minutes qui pourraient tout changer.', 'trial.cta': 'Réserver mon essai gratuit →',
+    'footer.tagline': 'Cours d\'anglais pour des étudiants de toutes cultures, origines et fuseaux horaires.',
+    'footer.learn': 'Apprendre', 'footer.allcourses': 'Tous les cours', 'footer.beginner': 'Anglais débutant', 'footer.business': 'Anglais des affaires', 'footer.ielts': 'Préparation IELTS', 'footer.conversation': 'Cours de conversation',
+    'footer.company': 'Entreprise', 'footer.about': 'À propos', 'footer.teachers': 'Nos profs', 'footer.gallery': 'Galerie', 'footer.reviews': 'Avis étudiants', 'footer.blog': 'Blog',
+    'footer.contact': 'Contact', 'footer.booktrial': 'Réserver un essai', 'footer.whatsapp': 'WhatsApp', 'footer.faq': 'FAQ', 'footer.support': 'Assistance',
+    'footer.copy': '© 2025 LinguaWorld. Tous droits réservés.',
+  },
+  ar: {
+    'dir': 'rtl',
+    'nav.how': 'كيف يعمل', 'nav.courses': 'الدورات', 'nav.teachers': 'مدرسونا', 'nav.reviews': 'التقييمات', 'nav.gallery': 'معرض الصور', 'nav.cta': 'درس تجريبي مجاني',
+    'hero.eyebrow': 'نربط العالم من خلال اللغة',
+    'hero.title': 'الإنجليزية لـ<br><em>كل صوت،</em><br>كل قصة',
+    'hero.sub': 'دروس إنجليزية أونلاين مع معلمين متحمسين — مصممة لطلاب من كل أنحاء العالم. رحلتك اللغوية تبدأ هنا.',
+    'hero.cta1': 'احجز درساً تجريبياً ←', 'hero.cta2': 'استكشف الدورات',
+    'stats.students': 'طلاب حول العالم', 'stats.countries': 'دولة', 'stats.satisfaction': 'نسبة الرضا', 'stats.teachers': 'معلم متخصص',
+    'how.tag': 'بسيط وواضح', 'how.title': 'كيف تبدأ', 'how.sub': 'من الحجز إلى أول درس في أربع خطوات سهلة.',
+    'how.step1.title': 'احجز درساً تجريبياً', 'how.step1.text': 'اختر درساً تجريبياً مجانياً لمدة 30 دقيقة. بدون التزام أو بطاقة ائتمان.',
+    'how.step2.title': 'اختر وقتاً مناسباً', 'how.step2.text': 'تصفح تقويمنا الحي واختر الوقت الذي يناسبك — نغطي جميع المناطق الزمنية.',
+    'how.step3.title': 'استلم رابط زوم', 'how.step3.text': 'ستصلك رسالة تأكيد فورية مع رابط زوم الخاص بك — نقرة واحدة للانضمام.',
+    'how.step4.title': 'التقِ بمعلمك', 'how.step4.text': 'تواصل مباشرة، ابدأ التعلم، واكتشف الدورة المناسبة لك.',
+    'courses.tag': 'برامجنا', 'courses.title': 'اعثر على <em>دورتك المثالية</em>', 'courses.cart': 'عرض السلة',
+    'about.tag': 'عن LinguaWorld', 'about.title': 'تعليم الإنجليزية <em>بقلب،</em> عبر الحدود',
+    'about.sub': 'نحن فريق من المعلمين المتحمسين الذين يؤمنون بأن اللغة تفتح كل باب. طلابنا من أكثر من 48 دولة.',
+    'about.v1.title': 'شاملون عالمياً', 'about.v1.text': 'كل الخلفيات، كل الثقافات — الجميع مرحب بهم في LinguaWorld.',
+    'about.v2.title': 'تواصل إنساني حي', 'about.v2.text': 'معلمون حقيقيون، محادثات حقيقية — لا روبوتات ولا محاضرات مسجلة.',
+    'about.v3.title': 'تقدم مثبت', 'about.v3.text': 'دورات منظمة بنتائج قابلة للقياس وإنجازات شخصية.',
+    'teachers.tag': 'تعرف على الفريق', 'teachers.title': 'الأشخاص وراء <em>تقدمك</em>', 'teachers.sub': 'معتمدون، متحمسون، ومن حول العالم — مثل طلابنا تماماً.',
+    'teachers.banner.title': 'فريق واحد. <em>كل المناطق الزمنية.</em>', 'teachers.banner.sub': 'معلمونا متاحون 7 أيام في الأسبوع في جميع المناطق الزمنية.',
+    'video.tag': 'شاهدنا في العمل', 'video.title': 'شاهد كيف <em>يعمل</em> LinguaWorld', 'video.sub': 'تعرف على أسلوب تدريسنا وفريقنا وكيف يبدو الدرس النموذجي.', 'video.soon': 'قصتنا — قريباً',
+    'gallery.tag': 'عالمنا', 'gallery.title': 'لحظات من <em>حول العالم</em>', 'gallery.sub': 'مع سفرنا الدولي، تنمو هذه المعرض. عد كثيراً — المزيد من القصص قادم.',
+    'gallery.i1': 'مجتمع التعلم الإلكتروني', 'gallery.i2': 'لحظات التخرج', 'gallery.i3': 'التبادل الثقافي', 'gallery.i4': 'الجولة الدولية 2025 — قريباً', 'gallery.i5': 'أبرز الدروس', 'gallery.i6': 'ورش المحادثة', 'gallery.i7': 'قصص الطلاب', 'gallery.load': 'تحميل المزيد من الصور',
+    'reviews.tag': 'أصوات الطلاب', 'reviews.title': 'ما يقوله <em>طلابنا</em>', 'reviews.sub': 'تقدم حقيقي، أشخاص حقيقيون — من كل أنحاء العالم.',
+    'trial.tag': 'ابدأ اليوم', 'trial.title': 'درسك الأول<br><em>مجاني تماماً.</em>', 'trial.sub': 'لا التزام. لا بطاقة ائتمان. فقط 30 دقيقة قد تغير كل شيء.', 'trial.cta': '← احجز تجربتي المجانية',
+    'footer.tagline': 'دروس إنجليزية لطلاب من كل ثقافة وخلفية ومنطقة زمنية.',
+    'footer.learn': 'تعلم', 'footer.allcourses': 'جميع الدورات', 'footer.beginner': 'إنجليزي للمبتدئين', 'footer.business': 'إنجليزي الأعمال', 'footer.ielts': 'تحضير IELTS', 'footer.conversation': 'دروس المحادثة',
+    'footer.company': 'الشركة', 'footer.about': 'عنا', 'footer.teachers': 'مدرسونا', 'footer.gallery': 'المعرض', 'footer.reviews': 'آراء الطلاب', 'footer.blog': 'المدونة',
+    'footer.contact': 'اتصل بنا', 'footer.booktrial': 'احجز تجربة', 'footer.whatsapp': 'واتساب', 'footer.faq': 'الأسئلة الشائعة', 'footer.support': 'الدعم',
+    'footer.copy': '© 2025 LinguaWorld. جميع الحقوق محفوظة.',
+  },
+  es: {
+    'dir': 'ltr',
+    'nav.how': 'Cómo funciona', 'nav.courses': 'Cursos', 'nav.teachers': 'Nuestros Profesores', 'nav.reviews': 'Reseñas', 'nav.gallery': 'Galería', 'nav.cta': 'Clase de prueba gratis',
+    'hero.eyebrow': 'Conectando el mundo a través del idioma',
+    'hero.title': 'Inglés para<br><em>cada voz,</em><br>cada historia',
+    'hero.sub': 'Clases de inglés en línea con maestros apasionados — diseñadas para estudiantes de todo el mundo. Tu viaje lingüístico comienza aquí.',
+    'hero.cta1': 'Reservar una prueba gratuita →', 'hero.cta2': 'Explorar cursos',
+    'stats.students': 'Estudiantes en el mundo', 'stats.countries': 'Países alcanzados', 'stats.satisfaction': 'Tasa de satisfacción', 'stats.teachers': 'Profesores expertos',
+    'how.tag': 'Simple y claro', 'how.title': 'Cómo empezar', 'how.sub': 'Desde la reserva hasta tu primera clase en cuatro pasos sencillos.',
+    'how.step1.title': 'Reserva una prueba gratuita', 'how.step1.text': 'Elige una clase de prueba gratuita de 30 minutos. Sin compromiso, sin tarjeta de crédito.',
+    'how.step2.title': 'Elige tu disponibilidad', 'how.step2.text': 'Navega por nuestro calendario y elige un horario — cubrimos todos los husos horarios.',
+    'how.step3.title': 'Recibe tu enlace de Zoom', 'how.step3.text': 'Recibirás un correo de confirmación con tu enlace de Zoom único — un clic para unirte.',
+    'how.step4.title': 'Conoce a tu profesor', 'how.step4.text': 'Conéctate en vivo, empieza a aprender y descubre el curso adecuado para ti.',
+    'courses.tag': 'Nuestros programas', 'courses.title': 'Encuentra tu <em>curso ideal</em>', 'courses.cart': 'Ver carrito',
+    'about.tag': 'Sobre LinguaWorld', 'about.title': 'Enseñando inglés <em>con corazón,</em> sin fronteras',
+    'about.sub': 'Somos un equipo de educadores apasionados que creen que el idioma abre todas las puertas. Nuestros estudiantes vienen de más de 48 países.',
+    'about.v1.title': 'Inclusión global', 'about.v1.text': 'Cada origen, cada cultura — todos son bienvenidos en LinguaWorld.',
+    'about.v2.title': 'Conexión humana en vivo', 'about.v2.text': 'Profesores reales, conversaciones reales — no bots ni clases pregrabadas.',
+    'about.v3.title': 'Progreso comprobado', 'about.v3.text': 'Cursos estructurados con resultados medibles e hitos personales.',
+    'teachers.tag': 'El equipo', 'teachers.title': 'Las personas detrás de <em>tu progreso</em>', 'teachers.sub': 'Certificados, apasionados y de todo el mundo — igual que nuestros estudiantes.',
+    'teachers.banner.title': 'Un equipo. <em>Todos los husos.</em>', 'teachers.banner.sub': 'Nuestros profesores están disponibles 7 días a la semana en todos los husos horarios.',
+    'video.tag': 'Véanos en acción', 'video.title': 'Mira cómo <em>funciona</em> LinguaWorld', 'video.sub': 'Conoce nuestro estilo de enseñanza, nuestro equipo y cómo es una clase típica.', 'video.soon': 'Nuestra historia — próximamente',
+    'gallery.tag': 'Nuestro mundo', 'gallery.title': 'Momentos <em>alrededor del mundo</em>', 'gallery.sub': 'A medida que viajamos, esta galería crece. Vuelve pronto — más historias por venir.',
+    'gallery.i1': 'Comunidad de aprendizaje', 'gallery.i2': 'Momentos de graduación', 'gallery.i3': 'Intercambio cultural', 'gallery.i4': 'Gira internacional 2025 — Próximamente', 'gallery.i5': 'Momentos destacados', 'gallery.i6': 'Talleres de conversación', 'gallery.i7': 'Historias de estudiantes', 'gallery.load': 'Cargar más fotos',
+    'reviews.tag': 'Voces de estudiantes', 'reviews.title': 'Lo que dicen <em>nuestros estudiantes</em>', 'reviews.sub': 'Progreso real, personas reales — de todos los rincones del mundo.',
+    'trial.tag': 'Empieza hoy', 'trial.title': 'Tu primera clase es<br><em>completamente gratis.</em>', 'trial.sub': 'Sin compromiso. Sin tarjeta. Solo 30 minutos que podrían cambiarlo todo.', 'trial.cta': 'Reservar mi prueba gratuita →',
+    'footer.tagline': 'Clases de inglés para estudiantes de todas las culturas, orígenes y husos horarios.',
+    'footer.learn': 'Aprender', 'footer.allcourses': 'Todos los cursos', 'footer.beginner': 'Inglés básico', 'footer.business': 'Inglés de negocios', 'footer.ielts': 'Preparación IELTS', 'footer.conversation': 'Clases de conversación',
+    'footer.company': 'Empresa', 'footer.about': 'Sobre nosotros', 'footer.teachers': 'Nuestros profesores', 'footer.gallery': 'Galería', 'footer.reviews': 'Reseñas', 'footer.blog': 'Blog',
+    'footer.contact': 'Contacto', 'footer.booktrial': 'Reservar prueba', 'footer.whatsapp': 'WhatsApp', 'footer.faq': 'FAQ', 'footer.support': 'Soporte',
+    'footer.copy': '© 2025 LinguaWorld. Todos los derechos reservados.',
+  },
+  pt: {
+    'dir': 'ltr',
+    'nav.how': 'Como funciona', 'nav.courses': 'Cursos', 'nav.teachers': 'Nossos Professores', 'nav.reviews': 'Avaliações', 'nav.gallery': 'Galeria', 'nav.cta': 'Aula experimental grátis',
+    'hero.eyebrow': 'Conectando o mundo através da linguagem',
+    'hero.title': 'Inglês para<br><em>cada voz,</em><br>cada história',
+    'hero.sub': 'Aulas de inglês online com professores apaixonados — projetadas para alunos de todos os cantos do mundo. Sua jornada linguística começa aqui.',
+    'hero.cta1': 'Agendar aula gratuita →', 'hero.cta2': 'Explorar cursos',
+    'stats.students': 'Alunos no mundo', 'stats.countries': 'Países alcançados', 'stats.satisfaction': 'Taxa de satisfação', 'stats.teachers': 'Professores especializados',
+    'how.tag': 'Simples e claro', 'how.title': 'Como começar', 'how.sub': 'Da reserva à primeira aula em quatro passos simples.',
+    'how.step1.title': 'Reserve uma aula gratuita', 'how.step1.text': 'Escolha uma aula experimental gratuita de 30 minutos. Sem compromisso, sem cartão.',
+    'how.step2.title': 'Escolha sua disponibilidade', 'how.step2.text': 'Navegue pelo nosso calendário e escolha um horário — cobrimos todos os fusos horários.',
+    'how.step3.title': 'Receba seu link do Zoom', 'how.step3.text': 'Você receberá um e-mail de confirmação com seu link exclusivo do Zoom.',
+    'how.step4.title': 'Conheça seu professor', 'how.step4.text': 'Conecte-se ao vivo, comece a aprender e descubra o curso certo para você.',
+    'courses.tag': 'Nossos programas', 'courses.title': 'Encontre o <em>curso ideal</em>', 'courses.cart': 'Ver carrinho',
+    'about.tag': 'Sobre a LinguaWorld', 'about.title': 'Ensinando inglês <em>com paixão,</em> sem fronteiras',
+    'about.sub': 'Somos uma equipe de educadores apaixonados que acreditam que a linguagem abre todas as portas. Nossos alunos vêm de mais de 48 países.',
+    'about.v1.title': 'Inclusão global', 'about.v1.text': 'Toda origem, toda cultura — todos são bem-vindos na LinguaWorld.',
+    'about.v2.title': 'Conexão humana ao vivo', 'about.v2.text': 'Professores reais, conversas reais — sem robôs ou aulas pré-gravadas.',
+    'about.v3.title': 'Progresso comprovado', 'about.v3.text': 'Cursos estruturados com resultados mensuráveis e marcos pessoais.',
+    'teachers.tag': 'A equipe', 'teachers.title': 'As pessoas por trás do <em>seu progresso</em>', 'teachers.sub': 'Certificados, apaixonados e de todo o mundo — assim como nossos alunos.',
+    'teachers.banner.title': 'Uma equipe. <em>Todos os fusos.</em>', 'teachers.banner.sub': 'Nossos professores estão disponíveis 7 dias por semana em todos os fusos horários.',
+    'video.tag': 'Veja-nos em ação', 'video.title': 'Veja como a LinguaWorld <em>funciona</em>', 'video.sub': 'Conheça nosso estilo de ensino, nossa equipe e como é uma aula típica.', 'video.soon': 'Nossa história — em breve',
+    'gallery.tag': 'Nosso mundo', 'gallery.title': 'Momentos <em>ao redor do globo</em>', 'gallery.sub': 'À medida que viajamos, esta galeria cresce. Volte sempre — mais histórias por vir.',
+    'gallery.i1': 'Comunidade de aprendizagem', 'gallery.i2': 'Momentos de formatura', 'gallery.i3': 'Intercâmbio cultural', 'gallery.i4': 'Tournée internacional 2025 — Em breve', 'gallery.i5': 'Destaques das aulas', 'gallery.i6': 'Workshops de conversação', 'gallery.i7': 'Histórias de alunos', 'gallery.load': 'Carregar mais fotos',
+    'reviews.tag': 'Vozes dos alunos', 'reviews.title': 'O que dizem <em>nossos alunos</em>', 'reviews.sub': 'Progresso real, pessoas reais — de todos os cantos do mundo.',
+    'trial.tag': 'Comece hoje', 'trial.title': 'Sua primeira aula é<br><em>completamente gratuita.</em>', 'trial.sub': 'Sem compromisso. Sem cartão. Apenas 30 minutos que podem mudar tudo.', 'trial.cta': 'Reservar minha aula gratuita →',
+    'footer.tagline': 'Aulas de inglês para alunos de todas as culturas, origens e fusos horários.',
+    'footer.learn': 'Aprender', 'footer.allcourses': 'Todos os cursos', 'footer.beginner': 'Inglês básico', 'footer.business': 'Inglês de negócios', 'footer.ielts': 'Preparação IELTS', 'footer.conversation': 'Aulas de conversação',
+    'footer.company': 'Empresa', 'footer.about': 'Sobre nós', 'footer.teachers': 'Nossos professores', 'footer.gallery': 'Galeria', 'footer.reviews': 'Avaliações', 'footer.blog': 'Blog',
+    'footer.contact': 'Contato', 'footer.booktrial': 'Reservar aula', 'footer.whatsapp': 'WhatsApp', 'footer.faq': 'FAQ', 'footer.support': 'Suporte',
+    'footer.copy': '© 2025 LinguaWorld. Todos os direitos reservados.',
+  },
+  ja: {
+    'dir': 'ltr',
+    'nav.how': '仕組み', 'nav.courses': 'コース', 'nav.teachers': '先生たち', 'nav.reviews': 'レビュー', 'nav.gallery': 'ギャラリー', 'nav.cta': '無料体験レッスン',
+    'hero.eyebrow': '言語で世界をつなぐ',
+    'hero.title': '<em>すべての声、</em><br>すべての物語のための<br>英語',
+    'hero.sub': '情熱的な先生によるオンライン英語レッスン — 世界中の生徒のために設計されています。あなたの言語の旅がここから始まります。',
+    'hero.cta1': '無料体験を予約する →', 'hero.cta2': 'コースを見る',
+    'stats.students': '世界中の生徒', 'stats.countries': '対応国数', 'stats.satisfaction': '満足度', 'stats.teachers': '専門講師',
+    'how.tag': 'シンプルで明確', 'how.title': '始め方', 'how.sub': '予約から最初のレッスンまで4つの簡単なステップ。',
+    'how.step1.title': '無料体験を予約', 'how.step1.text': '30分の無料体験レッスンを選択。コミットメント不要、クレジットカード不要。',
+    'how.step2.title': '空き時間を選択', 'how.step2.text': 'カレンダーを見てスケジュールに合った時間を選択 — 全タイムゾーン対応。',
+    'how.step3.title': 'ZoomリンクをGet', 'how.step3.text': '確認メールにZoomリンクが届きます — ワンクリックで参加。',
+    'how.step4.title': '先生と出会う', 'how.step4.text': 'ライブで繋がり、学習を始め、あなたに合ったコースを見つけましょう。',
+    'courses.tag': 'プログラム', 'courses.title': 'あなたに合った<em>コース</em>を見つけよう', 'courses.cart': 'カートを見る',
+    'about.tag': 'LinguaWorldについて', 'about.title': '<em>心を込めて、</em>国境を越えて英語を教える',
+    'about.sub': '私たちは言語がすべての扉を開くと信じる情熱的な英語教育者のチームです。生徒は48か国以上から来ています。',
+    'about.v1.title': 'グローバルな包括性', 'about.v1.text': 'あらゆるバックグラウンド、あらゆる文化 — LinguaWorldでは全員を歓迎します。',
+    'about.v2.title': 'ライブ人間的つながり', 'about.v2.text': '本物の先生、本物の会話 — ボットや録画講義ではありません。',
+    'about.v3.title': '実証済みの進歩', 'about.v3.text': '測定可能な結果と個人的な節目を備えた構造化されたコース。',
+    'teachers.tag': 'チームを紹介', 'teachers.title': '<em>あなたの進歩</em>を支える人々', 'teachers.sub': '認定資格を持ち、情熱的で、世界中から来た先生たち — 生徒と同じように。',
+    'teachers.banner.title': 'ひとつのチーム。<em>すべてのタイムゾーン。</em>', 'teachers.banner.sub': '先生たちは週7日、すべてのタイムゾーンで利用可能です。',
+    'video.tag': '授業を見てみよう', 'video.title': 'LinguaWorldの<em>仕組み</em>を見る', 'video.sub': '私たちの指導スタイル、チーム、典型的なレッスンをご覧ください。', 'video.soon': '私たちのストーリー — 近日公開',
+    'gallery.tag': '私たちの世界', 'gallery.title': '<em>世界中</em>からの瞬間', 'gallery.sub': '旅を重ねるごとにギャラリーが広がります。また訪れてください — もっとストーリーが来ます。',
+    'gallery.i1': 'オンライン学習コミュニティ', 'gallery.i2': '卒業の瞬間', 'gallery.i3': '文化交流', 'gallery.i4': '国際ツアー2025 — 近日', 'gallery.i5': 'レッスンハイライト', 'gallery.i6': 'スピーキングワークショップ', 'gallery.i7': '生徒のストーリー', 'gallery.load': '写真をもっと見る',
+    'reviews.tag': '生徒の声', 'reviews.title': '生徒たちが<em>語ること</em>', 'reviews.sub': '本物の進歩、本物の人々 — 世界中から。',
+    'trial.tag': '今日から始める', 'trial.title': '最初のレッスンは<br><em>完全無料。</em>', 'trial.sub': 'コミットメントなし。カードなし。すべてを変えるかもしれない30分。', 'trial.cta': '無料体験を予約する →',
+    'footer.tagline': 'あらゆる文化、バックグラウンド、タイムゾーンの生徒のための英語レッスン。',
+    'footer.learn': '学ぶ', 'footer.allcourses': '全コース', 'footer.beginner': '初級英語', 'footer.business': 'ビジネス英語', 'footer.ielts': 'IELTS対策', 'footer.conversation': '会話クラス',
+    'footer.company': '会社', 'footer.about': '私たちについて', 'footer.teachers': '先生たち', 'footer.gallery': 'ギャラリー', 'footer.reviews': '生徒のレビュー', 'footer.blog': 'ブログ',
+    'footer.contact': 'お問い合わせ', 'footer.booktrial': '体験を予約', 'footer.whatsapp': 'WhatsApp', 'footer.faq': 'よくある質問', 'footer.support': 'サポート',
+    'footer.copy': '© 2025 LinguaWorld. 全著作権所有。',
+  },
+};
+
+const langMeta = {
+  en: { flag:'🇬🇧', code:'EN' },
+  fr: { flag:'🇫🇷', code:'FR' },
+  ar: { flag:'🇸🇦', code:'AR' },
+  es: { flag:'🇪🇸', code:'ES' },
+  pt: { flag:'🇧🇷', code:'PT' },
+  ja: { flag:'🇯🇵', code:'JA' },
+};
+
+let currentLang = 'en';
+
+function applyLang(lang) {
+  const t = translations[lang] || translations.en;
+  currentLang = lang;
+
+  // Direction
+  document.documentElement.dir = t.dir;
+  document.documentElement.lang = lang;
+
+  // Apply translations
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update lang button
+  const meta = langMeta[lang];
+  document.getElementById('langFlag').textContent = meta.flag;
+  document.getElementById('langCode').textContent = meta.code;
+
+  // Update active class
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.lang === lang);
+  });
+
+  // RTL adjustments
+  if (t.dir === 'rtl') {
+    document.querySelectorAll('.hero-content').forEach(el => el.style.textAlign = 'right');
+  } else {
+    document.querySelectorAll('.hero-content').forEach(el => el.style.textAlign = '');
+  }
+}
+
+function initLangSwitcher() {
+  const switcher = document.getElementById('langSwitcher');
+  const btn = document.getElementById('langBtn');
+  const dropdown = document.getElementById('langDropdown');
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    switcher.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      applyLang(opt.dataset.lang);
+      switcher.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', () => switcher.classList.remove('open'));
+}
+
+// ─── COURSES DATA ───
+const courses = [
+  { id:1, emoji:'✨', level:'All Levels', name:'Free Trial Lesson', desc:'Start here — 30 minutes with a real teacher, no strings attached.', price:0, gradient:'c1' },
+  { id:2, emoji:'📖', level:'Beginner', name:'English Foundations', desc:'Perfect for those just starting. Build confidence with core grammar and everyday vocabulary.', price:49, gradient:'c2' },
+  { id:3, emoji:'💼', level:'Intermediate', name:'Business English', desc:'Professional emails, meetings, presentations — English for the modern workplace.', price:79, gradient:'c3' },
+  { id:4, emoji:'🎯', level:'Advanced', name:'IELTS Mastery', desc:'Targeted exam preparation with proven strategies to hit your band score goal.', price:99, gradient:'c4' },
+  { id:5, emoji:'🗣️', level:'Intermediate', name:'Conversation Boost', desc:'Speak freely. Gain fluency through guided discussions, debates, and real-world scenarios.', price:59, gradient:'c5' },
+  { id:6, emoji:'🌐', level:'All Levels', name:'Culture & Communication', desc:'Language and culture together — understand idioms, humour, and the real way English is spoken.', price:49, gradient:'c6' },
+];
+
+let cart = [];
+
+function renderCourses() {
+  const grid = document.getElementById('coursesGrid');
+  grid.innerHTML = courses.map(c => `
+    <div class="course-card reveal">
+      <div class="course-img ${c.gradient}">${c.emoji}</div>
+      <div class="course-body">
+        <div class="course-level">${c.level}</div>
+        <div class="course-name">${c.name}</div>
+        <div class="course-desc">${c.desc}</div>
+        <div class="course-footer">
+          <div class="course-price">${c.price === 0 ? 'FREE' : '$' + c.price} <span>${c.price > 0 ? '/ month' : ''}</span></div>
+          <button class="add-cart" id="btn-${c.id}" onclick="addToCart(${c.id})">+ Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+function addToCart(id) {
+  const course = courses.find(c => c.id === id);
+  if (!cart.find(c => c.id === id)) {
+    cart.push(course);
+    document.getElementById(`btn-${id}`).textContent = '✓ Added';
+    document.getElementById(`btn-${id}`).classList.add('added');
+    updateCart();
+  }
+}
+
+function updateCart() {
+  const count = cart.length;
+  document.getElementById('cartCount').textContent = count;
+  const total = cart.reduce((s, c) => s + c.price, 0);
+  document.getElementById('cartTotal').textContent = '$' + total;
+  const items = document.getElementById('cartItems');
+  if (count === 0) {
+    items.innerHTML = '<div class="empty-cart"><div class="e">🛒</div><p>Your cart is empty</p></div>';
+  } else {
+    items.innerHTML = cart.map(c => `
+      <div class="cart-item">
+        <div class="cart-item-emoji">${c.emoji}</div>
+        <div>
+          <div class="cart-item-name">${c.name}</div>
+          <div class="cart-item-price">${c.price === 0 ? 'FREE' : '$' + c.price + ' / month'}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// Cart open/close
+function openCart() {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+document.getElementById('cartToggle').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+// ─── REVIEWS DATA ───
+const reviews = [
+  { emoji:'👩🏻', name:'Yuki T.', country:'🇯🇵 Japan', stars:5, text:'My speaking confidence has transformed completely. I was terrified to speak in meetings before. Now I lead them.', gradient:'linear-gradient(135deg,#FF6B35,#FFB347)' },
+  { emoji:'👨🏿', name:'Kwame A.', country:'🇬🇭 Ghana', stars:5, text:'The teachers really care. They remember your goals, your struggles, and they push you to grow every single lesson.', gradient:'linear-gradient(135deg,#5B5BD6,#9B59B6)' },
+  { emoji:'👩🏽', name:'Fatima R.', country:'🇸🇦 Saudi Arabia', stars:5, text:'I went from Band 6 to Band 7.5 in just three months of IELTS preparation. I cannot believe the difference.', gradient:'linear-gradient(135deg,#27AE60,#2ECC71)' },
+  { emoji:'👦🏻', name:'Lucas M.', country:'🇧🇷 Brazil', stars:5, text:'I had tried apps, I had tried YouTube — nothing worked. Real lessons with real teachers changed everything for me.', gradient:'linear-gradient(135deg,#E91E8C,#FF6B35)' },
+  { emoji:'👩🏾', name:'Amara K.', country:'🇳🇬 Nigeria', stars:5, text:'The lessons are perfectly structured but also feel natural and fun. I always look forward to my sessions.', gradient:'linear-gradient(135deg,#00B4DB,#5B5BD6)' },
+  { emoji:'👨🏻‍💼', name:'Pierre D.', country:'🇫🇷 France', stars:5, text:'Business English for my new role in London. Within weeks my emails and presentations sounded truly professional.', gradient:'linear-gradient(135deg,#F7971E,#FFD200)' },
+];
+
+function renderReviews() {
+  const grid = document.getElementById('reviewsGrid');
+  grid.innerHTML = reviews.map(r => `
+    <div class="review-card reveal">
+      <div class="review-avatar" style="background:rgba(0,0,0,0.05);--g1:#f00;--g2:#00f">
+        <div style="position:absolute;inset:-2px;border-radius:50%;background:${r.gradient};z-index:-1;"></div>
+        ${r.emoji}
+      </div>
+      <div class="review-stars">${'★'.repeat(r.stars)}</div>
+      <p class="review-text">"${r.text}"</p>
+      <div class="review-author">${r.name}</div>
+      <div class="review-country">${r.country}</div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ─── REVEAL ON SCROLL ───
+function observeReveal() {
+  const els = document.querySelectorAll('.reveal:not(.visible)');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+
+// INIT
+initHeroCanvas();
+initCursor();
+initLangSwitcher();
+renderCourses();
+renderReviews();
+observeReveal();
+
+</script>
+</body>
+</html>
